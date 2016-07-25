@@ -1,0 +1,16 @@
+eclipse.preferences.version=1
+encoding//src/main/java=UTF-8
+encoding//src/main/resources=UTF-8
+encoding//src/main/webapp/views/admin/admin.html=UTF-8
+encoding//src/main/webapp/views/admin/adminForm.html=UTF-8
+encoding//src/main/webapp/views/boardConfig/boardConfig.html=UTF-8
+encoding//src/main/webapp/views/boardConfig/boardConfigForm.html=UTF-8
+encoding//src/main/webapp/views/contents/contents.html=UTF-8
+encoding//src/main/webapp/views/group/group.html=UTF-8
+encoding//src/main/webapp/views/group/groupForm.html=UTF-8
+encoding//src/main/webapp/views/index.html=UTF-8
+encoding//src/main/webapp/views/menu/menu.html=UTF-8
+encoding//src/main/webapp/views/site/site.html=UTF-8
+encoding//src/main/webapp/views/site/siteForm.html=UTF-8
+encoding//src/test/java=UTF-8
+encoding/<project>=UTF-8

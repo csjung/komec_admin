@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <meta name="description" content="한국조선해양기자재 - CMS 관리 시스템" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    
+    <title>한국조선해양기자재 - CMS 관리 시스템</title>
+    <link href="../css/login/base.css" rel="stylesheet" type="text/css" />
+    <link href="../css/login/style.css" rel="stylesheet" type="text/css" />
+    <link href="../css/login/login.css" rel="stylesheet" type="text/css" />
+    
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    
+  </head>
+  <body>
+    <div id="dc_wrap">
+        <div id="dc_contents" class="dc_login_wrap">
+            <div class="dc_login">
+                <div class="dc_login_input">
+                    <h1><img src="../img/login_logo.png" alt="한국조선해양기자재" /></h1>
+                    <form id="frm_login" name="frm_login" th:action="@{/login-process.html}" method="post">
+                    <fieldset>
+                        <legend class="dc_blind">로그인</legend>
+                        <label for="id" class="dc_blind">아이디</label><input type="text" id="id" name="username" size="20" required="required" autofocus="autofocus" />
+                        <label for="pw" class="dc_blind">패스워드</label><input type="password" id="pw" name="password" size="20" autocomplete="off" required="required" />
+<!--                            <input type="checkbox" id="fm_check0101" /><label for="fm_check0101">아이디 저장</label> -->
+                        <button class="btn_login" type="submit">LOGIN</button>
+                    </fieldset>
+                    </form>
+                </div>
+                
+                <div class="dc_login_web">
+                    <h2>Administrator</h2>
+                    <p class="txt01">환영합니다.</p>
+                    <p class="txt02">로그인을 하시면 통합관리자 모드의<br />모든 기능을 사용하실 수 있습니다.</p>
+                    <span class="btn_web"><a href="">Web site</a></span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+  </body>
+</html>    

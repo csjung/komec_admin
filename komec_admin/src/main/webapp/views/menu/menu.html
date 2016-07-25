@@ -1,0 +1,92 @@
+<!-- Nested node template -->
+<script type="text/ng-template" id="menus_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content" ng-class="{nodrop: node.nodrop}">
+    <a class="btn btn-success btn-xs" ng-if="node.menus && node.menus.length > 0" data-nodrag ng-click="toggle(this)"><span
+        class="glyphicon"
+        ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }"></span></a>
+    <span class="tree-node-content-text">{{node.name}}</span>
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeItem(this)" ng-hide="node.siteUrl">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 5px;">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="edit(this)" style="margin-right: 5px;" ng-hide="node.siteUrl">
+      <span class="glyphicon glyphicon-edit"></span>
+    </a>
+  </div>
+  <ol ui-tree-nodes="" ng-model="node.menus" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.menus" ui-tree-node ng-include="'menus_renderer.html'"></li>
+  </ol>
+</script>
+
+<div class="row">
+    <div class="col-lg-12">
+        <h2 class="page-header">메뉴 관리</h2>
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
+<div class="row"> 
+  <div class="col-lg-12">
+    <div class="btn-group" uib-dropdown>
+      <button id="split-button" type="button" class="btn btn-info">사이트를 선택 주세요</button>
+      <button type="button" class="btn btn-info" uib-dropdown-toggle>
+        <span class="caret"></span>
+        <span class="sr-only">Split button!</span>
+      </button>
+      <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="split-button">
+        <li role="menuitem" ng-repeat="item in sites"><a href ng-click="setSite(item)">{{item.name}}</a></li>
+      </ul>
+    </div>
+  </div>  
+</div>
+<div class="row" style="margin-top: 10px;">
+  <div class="col-sm-4">
+    <div ui-tree="treeOptions">
+      <ol ui-tree-nodes ng-model="menus">
+        <li ng-repeat="node in menus" ui-tree-node ng-include="'menus_renderer.html'"></li>
+      </ol>
+    </div>
+  </div>
+  <div class="col-sm-8">
+    <form name="menuForm" class="form-horizontal" ng-show="menuFlag">
+      <div class="modal-body">
+          <div class="form-group">
+            <label class="control-label col-sm-3">메뉴명</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="메뉴명을 입력 해 주세요." ng-model="menu.name" ng-required="true">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="userId">메뉴 영문명</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="메뉴 영문명을 입력 해 주세요." ng-model="menu.nameEn">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="userName">메뉴타입</label>
+            <div class="col-sm-9">
+                <label class="btn btn-success" ng-model="menu.menuType" uib-btn-radio="'CONTENT'" uncheckable>콘텐츠</label>
+                <label class="btn btn-success" ng-model="menu.menuType" uib-btn-radio="'BOARD'" uncheckable>게시판</label>
+                <label class="btn btn-success" ng-model="menu.menuType" uib-btn-radio="'PROGRAM'" uncheckable>프로그램</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="control-label col-sm-3" for="userName">사용유무</label>
+            <div class="col-sm-9">
+                <label class="btn btn-success" ng-model="menu.useState" uib-btn-radio="'USE'" >사용</label>
+                <label class="btn btn-success" ng-model="menu.useState" uib-btn-radio="'NOTUSE'">사용안함</label>
+            </div>
+          </div>
+      </div>
+      <div class="modal-footer">
+          <button class="btn btn-primary" ng-click="saveMenu()">저장</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
