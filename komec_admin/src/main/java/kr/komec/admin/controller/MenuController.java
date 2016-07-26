@@ -18,17 +18,17 @@ public class MenuController {
 	private MenuRepository menuRepository;
 	
 	@RequestMapping(value = "/menu/save", method = RequestMethod.POST)
-	public Menu save(@RequestBody Menu menuManager) {
-	    if (menuManager.getSort() == 0) {
-		Long sort = menuRepository.findByMaxSort(menuManager.getUpperId());
+	public Menu save(@RequestBody Menu menu) {
+	    if (menu.getSort() == 0) {
+		Long sort = menuRepository.findByMaxSort(menu.getUpperId());
 			if (sort == null) {
-				menuManager.setSort(1);
+				menu.setSort(1);
 			} else {
-				menuManager.setSort(sort.longValue() + 1);
+				menu.setSort(sort.longValue() + 1);
 			}
 	    }
-		menuManager = menuRepository.save(menuManager);
-		return menuManager;
+		menu = menuRepository.save(menu);
+		return menu;
 	}
 	
 	@RequestMapping(value = "/menu/getMenuList", method = RequestMethod.GET)
@@ -41,9 +41,14 @@ public class MenuController {
 		return menuRepository.findBySiteId(siteId);
 	}
 	
+	@RequestMapping(value = "/menu/getMenuById", method = RequestMethod.GET)
+	public Menu getMenuById(long id) {
+		return menuRepository.findOne(id);
+	}
+	
 	@RequestMapping(value = "/menu/del", method = RequestMethod.POST)
-	public String del(@RequestBody Menu menuManager) {
-		menuRepository.delete(menuManager);
+	public String del(@RequestBody Menu menu) {
+		menuRepository.delete(menu);
 		return "{}";
 	}
 	

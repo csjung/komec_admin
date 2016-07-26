@@ -31,6 +31,7 @@
 			var nodeData = scope.$modelValue;
 			$log.log(nodeData);
 			var menu = {};
+			menu.menus = [];
 			menu.useState = 'USE';
 			if (nodeData.upperId === undefined) {
 				menu.siteId = nodeData.id;
@@ -59,6 +60,7 @@
             $window.scrollTo(0, 0);
         };
         
+        // 메뉴 저장
         $scope.saveMenu = function () {
         	$http({
                 method  : 'POST',
@@ -72,7 +74,49 @@
                    alert('데이터 저장이 실패했습니다.');
                });
         };
-		
+        
+        // 메뉴 삭제
+        $scope.removeItem = function (scope) {
+        	var nodeData = scope.$modelValue;
+            var delConfirm = $window.confirm('하위정보도 모두 삭제 됩니다.\n정말 삭제 하시겠습니까 ?');
+            if (delConfirm) {
+            	if (nodeData.menus) {
+            		$scope.deepDel(nodeData.menus);
+            	}
+            	$http({
+                    method  : 'POST',
+                    url     : '/menu/del',
+                    data    : nodeData
+                   })
+                   .success(function(response) {
+                   })
+                   .error(function(data, status){
+                       alert('삭제 처리에 실패했습니다.');
+                   });
+            	scope.remove();
+                $scope.menuFlag = false;
+            }
+        };
+        
+        $scope.deepDel = function(dst) {
+    	    angular.forEach(dst, function(obj) {
+    	        if (obj !== dst) {
+	        	  $http({
+                    method  : 'POST',
+                    url     : '/menu/del',
+                    data    : obj
+                   })
+                   .success(function(response) {
+                   })
+                   .error(function(data, status){
+                       alert('삭제 처리에 실패했습니다.');
+                   });
+    	           if (obj.menus) {
+    	        		$scope.deepDel(obj.menus);
+    	           }
+    	        }
+    	    });
+    	};
 	})
 	
 	;
