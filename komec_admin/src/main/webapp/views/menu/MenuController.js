@@ -45,7 +45,7 @@
 	            data    : menu 
 	           })
 	           .success(function(response) {	        	  
-	              nodeData.nodes.push(response);
+	              nodeData.menus.push(response);
 	              $scope.menu = response;
 	              $scope.menuFlag = true;
 	           });

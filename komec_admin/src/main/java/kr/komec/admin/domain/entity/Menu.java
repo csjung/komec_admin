@@ -67,6 +67,7 @@ public class Menu {
 	
 	@OneToMany(mappedBy = "upperId", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
 	@OrderBy("sort")
+	@Column(nullable = true)
 	private List<Menu> menus;
 	
 }
