@@ -14,7 +14,7 @@
 					resolve: {
 						boardConfig: function () {
 							if (row) {
-			        			return row.entity;
+								return row.entity;
 			        		}  else {
 			        			return $scope.boardConfig;
 			        		}
@@ -43,12 +43,13 @@
 			appScopeProvider: $scope.myAppScopeProvider,
 			enableColumnMenus: false,
 			columnDefs: [
-				{ field: 'id', displayName: '번호', width: '5%', headerCellClass: 'text-center'},
-				{ field: 'name', displayName: '게시판명', width: '45%', headerCellClass: 'text-center'},
-				{ field: 'boardType', displayName: '게시판 종류', width: '20%', headerCellClass: 'text-center', cellFilter: 'boardTypeFilter'},
+				{ field: 'id', displayName: '번호', width: '5%', headerCellClass: 'text-center', cellClass: 'text-center'},
+				{ field: 'name', displayName: '게시판명', width: '40%', headerCellClass: 'text-center'},
+				{ field: 'remarks', displayName: '비고', width: '15%', headerCellClass: 'text-center'},
+				{ field: 'boardType', displayName: '게시판 종류', width: '10%', headerCellClass: 'text-center', cellClass: 'text-center', cellFilter: 'boardTypeFilter'},
 				{ field: 'useState', displayName: '사용유무', width: '10%', headerCellClass: 'text-center', cellClass: 'text-center', cellFilter: 'useStateFilter'},
 				{ field: 'update', displayName: '수정' , width: '10%', headerCellClass: 'text-center', cellClass: 'text-center', cellTemplate: '<div><button class="btn btn-primary btn-xs grid-align-venter" type="button" ng-click="grid.appScope.showInfo(row)">수정</button></div>' },
-				{ field: 'toBoard', displayName: '미리보기' , width: '10%', headerCellClass: 'text-center', cellClass: 'text-center', cellTemplate: '<div><button class="btn btn-primary btn-xs grid-align-venter" type="button" ng-click="grid.appScope.toBoard(row)">수정</button></div>' }
+				{ field: 'toBoard', displayName: '미리보기' , width: '10%', headerCellClass: 'text-center', cellClass: 'text-center', cellTemplate: '<div><button class="btn btn-primary btn-xs grid-align-venter" type="button" ng-click="grid.appScope.toBoard(row)">보기</button></div>' }
 			]
 		};
 		
@@ -97,14 +98,22 @@
 	  	};
 	  	
 	  	$scope.addCate = function() {
-		  if ($scope.boardConfig.boardCategorys.indexOf($scope.category)==-1){
-			  $scope.boardConfig.boardCategorys.push( $scope.category );
-		  }
+	  	  var boardCategory = {};
+	  	  boardCategory.name = $scope.category;
+	  	  boardCategory.boardConfigId = $scope.boardConfig.id;	
+	  	  if ($scope.boardConfig.boardCategorys) {
+	  		if ($scope.boardConfig.boardCategorys.indexOf($scope.category)==-1){
+			  $scope.boardConfig.boardCategorys.push( boardCategory );
+			}
+	  	  } else {
+	  		$scope.boardConfig.boardCategorys = [];
+	  		$scope.boardConfig.boardCategorys.push( boardCategory );
+	  	  }
 		  $scope.category = "";
 		};
 		  // remove an item
-	    $scope.removeCate = function ( idx ) {
-	      $scope.boardConfig.boardCategorys.splice( idx, 1 );
+	    $scope.removeCate = function ( $index ) {
+	      $scope.boardConfig.boardCategorys.splice( $index, 1 );
 	    };
 	    
 	    // 닫기

@@ -74,6 +74,15 @@
                 <label class="btn btn-success" ng-model="menu.menuType" uib-btn-radio="'PROGRAM'" uncheckable>프로그램</label>
             </div>
           </div>
+          <div class="form-group" ng-show="menu.menuType == 'BOARD'">
+            <label class="control-label col-sm-3" for="userName">게시판 선택</label>
+            <div class="col-sm-9">
+               <input type="text" ng-model="empValue" placeholder="게시판 명을 입력 하시면 자동 조회 됩니다." uib-typeahead="address for address in getEmployee($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">     
+            </div>
+          </div>
+          <div class="form-group" ng-show="menu.menuType == 'PROGRAM'">
+            <label class="control-label col-sm-3" for="userName">프로그램 URL</label>
+          </div>
           <div class="form-group">
             <label class="control-label col-sm-3" for="userName">사용유무</label>
             <div class="col-sm-9">

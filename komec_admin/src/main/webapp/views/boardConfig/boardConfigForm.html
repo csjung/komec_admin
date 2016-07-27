@@ -58,7 +58,7 @@
   <div class="form-group">
     <label class="control-label col-sm-3" for="useState">글머리</label>
     <div class="tags  col-sm-9">
-      <h4><span ng-repeat="(idx, tag) in boardConfig.boardCategorys" class="label label-success">{{tag}} <a class="close" href ng-click="removeCate(idx)">×</a></span></h4>
+      <h4><span ng-repeat="cate in boardConfig.boardCategorys" class="tag label label-success">{{cate.name}} <a class="close" href ng-click="removeCate($index)">×</a></span></h4>
     </div>
   </div>
   <div class="form-group">

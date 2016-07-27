@@ -1,13 +1,11 @@
 package kr.komec.admin.domain.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
 import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -67,7 +65,6 @@ public class BoardConfig {
 	private UseState useState;
 	
 	@Transient
-	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
-	private List<BoardCategory> boardCategorys;
+	private List<BoardCategory> boardCategorys = new ArrayList<>();
 	
 }
