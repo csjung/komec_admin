@@ -1,8 +1,14 @@
 package kr.komec.admin.domain.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Transient;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -51,11 +57,17 @@ public class BoardConfig {
 	/** 답글 여부 */
 	private YesOrNo replayYesOrNo;
 	
+	/** 비고 */
+	private String remarks; 	
 	
 	/** 에디터 사용여부 */
 	private UseState useEditState;
 	
 	/** 사용유무 */
 	private UseState useState;
+	
+	@Transient
+	@OneToMany(fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	private List<BoardCategory> boardCategorys;
 	
 }

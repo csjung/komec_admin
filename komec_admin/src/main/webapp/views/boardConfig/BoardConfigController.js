@@ -59,7 +59,7 @@
 			$scope.boardConfig.useEditState = 'USE';
 			$scope.boardConfig.useState = 'USE';
 			$scope.boardConfig.pagePerCnt = 10;
-			$scope.boardConfig.categorys = [];
+			$scope.boardConfig.boardCategorys = [];
 			
 	    	$scope.myAppScopeProvider.showInfo();
 	    };
@@ -97,14 +97,14 @@
 	  	};
 	  	
 	  	$scope.addCate = function() {
-		  if ($scope.boardConfig.categorys.indexOf($scope.category)==-1){
-			  $scope.boardConfig.categorys.push( $scope.category );
+		  if ($scope.boardConfig.boardCategorys.indexOf($scope.category)==-1){
+			  $scope.boardConfig.boardCategorys.push( $scope.category );
 		  }
 		  $scope.category = "";
 		};
 		  // remove an item
 	    $scope.removeCate = function ( idx ) {
-	      $scope.boardConfig.categorys.splice( idx, 1 );
+	      $scope.boardConfig.boardCategorys.splice( idx, 1 );
 	    };
 	    
 	    // 닫기
