@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
@@ -49,12 +51,20 @@ public class Menu {
 	@Column(nullable = true)
 	private Long contentsId;
 	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "contentsId", insertable = false, updatable = false)
+	private Contents contents;
+	
 	/** 프로그램 URL */
 	private String programUrl;
 	
 	/** 게시판 ID */
 	@Column(nullable = true)
-	private Long boardId;
+	private Long boardConfigId;
+	
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "boardConfigId", insertable = false, updatable = false)
+	private BoardConfig boardConfig;
 	
 	/** 메뉴타입 */
 	private MenuType menuType;

@@ -81,8 +81,8 @@
       </form>
       <form class="form-inline" role="form" >
           <div class="form-group col-sm-12 modal-footer">
-              <button class="btn btn-primary" ng-click="immediately()">즉시배포</button>
-              <button class="btn btn-primary" ng-click="scheduleDeploy()">예약배포</button>
+              <button class="btn btn-primary" type="button" ng-click="immediately()">즉시배포</button>
+              <button class="btn btn-primary" type="button" ng-click="scheduleDeploy()">예약배포</button>
               <p class="input-group" style="margin: 0;">
                   <input type="text" class="form-control" uib-datepicker-popup ng-model="deployDate" is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" />
                   <span class="input-group-btn">

@@ -23,6 +23,12 @@
   </ol>
 </script>
 
+<script type="text/ng-template" id="boardTemplate.html">
+  <a>
+      <span ng-bind="match.model.name"></span>(<span ng-bind="match.model.remarks"></span>)
+  </a>
+</script>
+
 <div class="row">
     <div class="col-lg-12">
         <h2 class="page-header">메뉴 관리</h2>
@@ -57,7 +63,7 @@
           <div class="form-group">
             <label class="control-label col-sm-3">메뉴명</label>
             <div class="col-sm-9">
-                <input type="text" class="form-control" placeholder="메뉴명을 입력 해 주세요." ng-model="menu.name" ng-required="true">
+                <input type="text" class="form-control" placeholder="메뉴명을 입력 해 주세요." ng-model="menu.name">
             </div>
           </div>
           <div class="form-group">
@@ -75,13 +81,16 @@
             </div>
           </div>
           <div class="form-group" ng-show="menu.menuType == 'BOARD'">
-            <label class="control-label col-sm-3" for="userName">게시판 선택</label>
+            <label class="control-label col-sm-3">게시판 선택</label>
             <div class="col-sm-9">
-               <input type="text" ng-model="empValue" placeholder="게시판 명을 입력 하시면 자동 조회 됩니다." uib-typeahead="address for address in getEmployee($viewValue)" typeahead-loading="loadingLocations" typeahead-no-results="noResults" class="form-control">     
+               <input type="text" ng-model="menu.boardConfig" placeholder="게시판 명을 입력 하시면 자동 조회 됩니다." uib-typeahead="boardConfig as boardConfig.name for boardConfig in getBoardConfig($viewValue)" typeahead-template-url="boardTemplate.html" class="form-control">     
             </div>
           </div>
           <div class="form-group" ng-show="menu.menuType == 'PROGRAM'">
-            <label class="control-label col-sm-3" for="userName">프로그램 URL</label>
+            <label class="control-label col-sm-3">프로그램 URL</label>
+            <div class="col-sm-9">
+                <input type="text" class="form-control" placeholder="프로그램 UR을 입력 해 주세요." ng-model="menu.programUrl">
+            </div>
           </div>
           <div class="form-group">
             <label class="control-label col-sm-3" for="userName">사용유무</label>
@@ -92,7 +101,7 @@
           </div>
       </div>
       <div class="modal-footer">
-          <button class="btn btn-primary" ng-click="saveMenu()">저장</button>
+          <button class="btn btn-primary" type="button" ng-click="saveMenu()">저장</button>
       </div>
     </form>
   </div>

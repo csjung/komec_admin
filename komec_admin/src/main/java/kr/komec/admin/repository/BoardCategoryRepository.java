@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
 import kr.komec.admin.domain.entity.BoardCategory;;
 
 @Repository
-public interface BoardCategoryRepository extends JpaRepository<BoardCategory, Long>{
+public interface BoardCategoryRepository extends JpaRepository<BoardCategory, Long> {
 	
 	int deleteByBoardConfigId(long boardConfigId);
 	

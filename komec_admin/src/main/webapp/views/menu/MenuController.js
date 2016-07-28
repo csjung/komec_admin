@@ -62,6 +62,12 @@
         
         // 메뉴 저장
         $scope.saveMenu = function () {
+        	if ($scope.menu.boardConfig) {
+        		$scope.menu.boardConfigId = $scope.menu.boardConfig.id;
+        	} else {
+        		$scope.menu.boardConfigId = null;
+        		$scope.menu.boardConfig = null;
+        	}
         	$http({
                 method  : 'POST',
                 url     : '/menu/save',
@@ -117,8 +123,20 @@
     	        }
     	    });
     	};
+    	
+    	// 게시판 정보 조회
+    	$scope.getBoardConfig = function(val) {
+    	    return $http.get('/boardConfig/getBoardConfigListForLike', {
+    	      params: {
+    	    	  filter: val,
+    	      }
+    	    }).then(function(response){
+    	      return response.data;
+    	    });
+    	  };
+
+    	  
 	})
-	
 	;
  
 }());      
