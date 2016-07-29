@@ -1,6 +1,5 @@
 package kr.komec.admin.controller;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,20 +24,23 @@ public class SiteController {
 	
 	@RequestMapping(value = "/site/save", method = RequestMethod.POST)
 	public Site save(@RequestBody Site siteManager) {
-		siteManager = siteRepository.save(siteManager);
+	    boolean menuCreate = false;
+	    if (siteManager.getId() == 0) {
+	    	menuCreate = true;
+	    }
+		siteRepository.save(siteManager);
+		if (menuCreate) {
+			Menu menu = new Menu();
+			menu.setName(siteManager.getName());
+			menu.setSiteId(siteManager.getId());
+			menuRepository.save(menu);
+		}
 		return siteManager;
 	}
 	
-	@RequestMapping(value = "/site/getSite", method = RequestMethod.GET)
-	public List<Site> getSite(long id) {
-		List<Site> list = new ArrayList<Site>();
-		Site site = siteRepository.getOne(id);
-		list.add(site);
-		List<Menu> menus = menuRepository.findBySiteIdAndUpperIdOrderBySortAsc(id, 0);
-		if (menus != null) {
-			site.setMenus(menus);
-		}
-		return list;
+	@RequestMapping(value = "/site/getMenusForSite", method = RequestMethod.GET)
+	public List<Menu> getMenusForSite(long id) {
+		return menuRepository.findBySiteIdAndUpperIdOrderBySortAsc(id, 0);
 	}
 	
 	@RequestMapping(value = "/site/getSiteList", method = RequestMethod.GET)

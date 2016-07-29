@@ -14,6 +14,8 @@
 							if (row) {
 			        			return row.entity;
 			        		}  else {
+			        			$scope.site = {};
+			        			$scope.site.useState = 'USE';
 			        			return $scope.site;;
 			        		}
 						}
@@ -56,13 +58,6 @@
 	})
 	.controller('SiteModal', function ($scope, $uibModalInstance, $http, $window, site) {
 		$scope.site = site;
-		$scope.delFlag = false;
-	    if (typeof site === "undefined") {
-	    	$scope.delFlag = false;
-	    } else {
-	    	$scope.delFlag = true;
-	    }
-	    
 	    // 저장
 	    $scope.submitForm = function() {
 		    $http({

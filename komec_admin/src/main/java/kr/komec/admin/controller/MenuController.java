@@ -27,7 +27,7 @@ public class MenuController {
 				menu.setSort(sort.longValue() + 1);
 			}
 	    }
-		menu = menuRepository.save(menu);
+		menuRepository.save(menu);
 		return menu;
 	}
 	

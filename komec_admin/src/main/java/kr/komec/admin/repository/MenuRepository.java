@@ -17,4 +17,5 @@ public interface MenuRepository extends JpaRepository<Menu, Long> {
 	
 	@Query("select max(u.sort) from Menu u where u.upperId = ?1")
 	Long findByMaxSort(long upperId);
+	
 }

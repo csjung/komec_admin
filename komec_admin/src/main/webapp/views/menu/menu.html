@@ -8,13 +8,13 @@
           'glyphicon-chevron-down': !collapsed
         }"></span></a>
     <span class="tree-node-content-text">{{node.name}}</span>
-    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeItem(this)" ng-hide="node.siteUrl">
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeItem(this)" ng-hide="node.upperId == 0">
       <span class="glyphicon glyphicon-remove"></span>
     </a>
     <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 5px;">
       <span class="glyphicon glyphicon-plus"></span>
     </a>
-    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="edit(this)" style="margin-right: 5px;" ng-hide="node.siteUrl">
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="edit(this)" style="margin-right: 5px;" ng-hide="node.upperId == 0">
       <span class="glyphicon glyphicon-edit"></span>
     </a>
   </div>

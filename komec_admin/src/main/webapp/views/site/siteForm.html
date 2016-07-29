@@ -20,7 +20,7 @@
     <label class="control-label col-sm-3" for="useState">사용유무</label>
     <div class="col-sm-9">
         <label class="btn btn-success" ng-model="site.useState" uib-btn-radio="'USE'" >사용</label>
-        <label class="btn btn-warning" ng-model="site.useState" uib-btn-radio="'NOTUSE'">사용안함</label>
+        <label class="btn btn-success" ng-model="site.useState" uib-btn-radio="'NOTUSE'">사용안함</label>
     </div>
   </div>
 </div>
@@ -28,7 +28,7 @@
    <button class="btn btn-primary" type="submit">
      <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;저장
    </button>
-   <button class="btn btn-danger" type="button" ng-show="delFlag" ng-click="del()">
+   <button class="btn btn-danger" type="button" ng-show="site.id" ng-click="del()">
        <span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;삭제
    </button>
    <button class="btn btn-warning" type="button" ng-click="cancel()">

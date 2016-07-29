@@ -45,6 +45,7 @@ public class Menu {
 	private long sort;
 	
 	/** 상위 ID */
+	@Column(nullable = true)
 	private long upperId;
 	
 	/** 콘텐츠 ID */
@@ -75,9 +76,7 @@ public class Menu {
 	/** 사이트 ID */
 	private long siteId;
 	
-	@OneToMany(mappedBy = "upperId", fetch = FetchType.LAZY, cascade = { CascadeType.MERGE })
+	@OneToMany(mappedBy = "upperId", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
 	@OrderBy("sort")
-	@Column(nullable = true)
 	private List<Menu> menus;
-	
 }
