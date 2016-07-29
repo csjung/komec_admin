@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mysema.query.types.Predicate;
+import com.querydsl.core.types.Predicate;
 
 import kr.komec.admin.domain.entity.BoardCategory;
 import kr.komec.admin.domain.entity.BoardConfig;
@@ -64,11 +64,8 @@ public class BoardConfigController {
 	
 	@RequestMapping(value = "/boardConfig/getBoardConfigListForLike", method = RequestMethod.GET)
 	public Iterable<BoardConfig> getBoardConfigListForLike(String filter) {
-		
 		QBoardConfig qBoardConfig = QBoardConfig.boardConfig;
 		Predicate predicate = qBoardConfig.name.like(filter + "%").or(qBoardConfig.remarks.like(filter + "%"));
-		//BooleanExpression nameLike = boardConfig.name.like(filter);
-		//BooleanExpression remarksLike = boardConfig.remarks.like(filter);
 		return boardConfigRepository.findAll(predicate);
 	}
 }
