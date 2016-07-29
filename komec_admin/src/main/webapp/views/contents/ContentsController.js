@@ -39,7 +39,7 @@
 		// 사이트 선택 시
 		$scope.setSite = function (item) {
 	        // 메뉴 정보 조회
-			$http.get('/site/getSite?id=' + item.id).success(function(data) {
+			$http.get('/site/getMenusForSite?id=' + item.id).success(function(data) {
 	            $scope.menus = data;
 	        });
 	    };
