@@ -6,12 +6,22 @@ spring:
       ddl-auto: update
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.SQLServerDialect
+       dialect: org.hibernate.dialect.SQLServer2008Dialect
   datasource:
-    url: jdbc:sqlserver://localhost:1433;DatabaseName=komec_display
-    username: komec_display
-    password: K@mec!@12
+#    url: jdbc:sqlserver://localhost:1433;DatabaseName=komec_display
+#    username: komec_display
+#    password: K@mec!@12
+    url: jdbc:sqlserver://192.168.10.163:1433;DatabaseName=portal
+    username: user1
+    password: 111111
     driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver 
   thymeleaf:
     check-template-location: false
+  http:
+    multipart:
+      max-file-size: 10Mb
+serverConfig:
+  webfileDir: C:\\webfile 
+  
+          
         

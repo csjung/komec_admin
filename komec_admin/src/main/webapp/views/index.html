@@ -56,17 +56,6 @@
             <div class="navbar-default sidebar" role="navigation">
                 <div class="sidebar-nav navbar-collapse">
                     <ul class="nav" id="side-menu">
-                        <li class="sidebar-search">
-                            <div class="input-group custom-search-form">
-                                <input type="text" class="form-control" placeholder="Search..." />
-                                <span class="input-group-btn">
-                                    <button class="btn btn-default" type="button">
-                                        <i class="fa fa-search"></i>
-                                    </button>
-                                </span>
-                            </div>
-                            <!-- /input-group -->
-                        </li>
                         <li>
                             <a href="/"><i class="fa fa-edit fa-fw"></i>CMS 관리자</a>
                         </li>
@@ -84,6 +73,9 @@
                         </li>
                         <li>
                             <a href="/#/boardConfig"><i class="fa fa-edit fa-fw"></i>게시판 관리</a>
+                        </li>
+                        <li>
+                            <a href="/#/bannerZone"><i class="fa fa-edit fa-fw"></i>배너 관리</a>
                         </li>
                     </ul>
                 </div>
@@ -103,6 +95,7 @@
     <script src="../bower_components/jquery/dist/jquery.min.js"></script>
     <script src="../bower_components/angular/angular.min.js"></script>
     <script src="../bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="../bower_components/angular-sanitize/angular-sanitize.min.js"></script>
     <script src="../bower_components/angular-route/angular-route.min.js"></script>
     <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js"></script>
     <script src="../bower_components/angular-ui-grid/ui-grid.min.js"></script>
@@ -118,6 +111,8 @@
     <script src="../views/menu/MenuController.js"></script>
     <script src="../views/contents/ContentsController.js"></script>
     <script src="../views/boardConfig/BoardConfigController.js"></script>
+    <script src="../views/bannerZone/BannerZoneController.js"></script>
+    <script src="../views/banner/BannerController.js"></script>
     
     <!-- Metis Menu Plugin JavaScript -->
     <script src="../bower_components/metisMenu/dist/metisMenu.min.js"></script>

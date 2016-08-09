@@ -29,7 +29,6 @@
         // 새 메뉴 추가
 		$scope.newSubItem = function (scope) {
 			var nodeData = scope.$modelValue;
-			$log.log(nodeData);
 			var menu = {};
 			menu.menus = [];
 			menu.useState = 'USE';

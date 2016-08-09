@@ -19,7 +19,7 @@ public class GroupController {
 	
 	@RequestMapping(value = "/group/save", method = RequestMethod.POST)
 	public GroupManager save(@RequestBody GroupManager groupManager) {
-		groupManager = groupRepository.save(groupManager);
+		groupRepository.save(groupManager);
 		return groupManager;
 	}
 	

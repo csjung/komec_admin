@@ -38,49 +38,37 @@
   </div>  
 </div>
 <div class="row" style="margin-top: 10px;">
-  <div class="col-sm-3">
+  <div class="col-lg-3">
     <div ui-tree="treeOptions">
       <ol ui-tree-nodes ng-model="menus">
         <li ng-repeat="node in menus" ui-tree-node ng-include="'menus_renderer.html'"></li>
       </ol>
     </div>
   </div>
-  <div class="col-sm-9" ng-show="contentsFlag">
+  <div class="col-lg-9" ng-show="contentsFlag">
     <form class="form-inline" role="form">
       <input type="hidden" ng-model="contentHist.id" />
-          <div class="form-group col-sm-5">
+          <div class="form-group col-lg-5">
               <label> 지난 콘텐츠 불러오기 : </label>
               <select class="form-control" name="mySelect" id="mySelect" 
                       ng-options="option.upDate | date:'yyyy-MM-dd HH:mm:ss' for option in contentHistList track by option.id"
                       ng-model="contentHist">
               </select>
           </div>
-          <div class="form-group col-sm-3">
+          <div class="form-group col-lg-3">
              <label style="padding-top: 5px;">수정자 : {{contentHist.upId}}</label>
           </div>
-          <div class="form-group col-sm-4">
+          <div class="form-group col-lg-4">
              <label  style="padding-top: 5px;">수정일 : {{contentHist.upDate | date:'yyyy-MM-dd HH:mm:ss'}}</label>
           </div> 
     </form>     
-          <!--  
-          <div class="form-group">
-            <label class="control-label col-sm-3">마지막 수정자</label>
-            <div class="col-sm-3">
-                <span ng-model="contents.upId"></span>
-            </div>
-            <label class="control-label col-sm-3">마지막 수정일</label>
-            <div class="col-sm-3">
-                <span ng-model="contents.upDate"></span>
-            </div>
-          </div>
-          -->
       <form role="form">   
-      <div class="form-group col-sm-12" style="margin-top: 10px;">
+      <div class="form-group col-lg-12" style="margin-top: 10px;">
         <textarea ng-model="contentHist.content" ckeditor="editorOptions"></textarea>
       </div>
       </form>
       <form class="form-inline" role="form" >
-          <div class="form-group col-sm-12 modal-footer">
+          <div class="form-group col-lg-12 modal-footer">
               <button class="btn btn-primary" type="button" ng-click="immediately()">즉시배포</button>
               <button class="btn btn-primary" type="button" ng-click="scheduleDeploy()">예약배포</button>
               <p class="input-group" style="margin: 0;">

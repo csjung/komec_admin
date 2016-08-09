@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('app', ['ui.tree', 'ngRoute', 'ui.bootstrap', 'ui.grid', 'ngAnimate', 'ngCkeditor', 'angularFileUpload']);
+var app = angular.module('app', ['ui.tree', 'ngRoute', 'ui.bootstrap', 'ui.grid', 'ngAnimate', 'ngCkeditor', 'angularFileUpload', 'ngSanitize']);
 
 app.config(function($routeProvider, $locationProvider) {
 	
@@ -10,40 +10,10 @@ app.config(function($routeProvider, $locationProvider) {
 		.when('/menu', {templateUrl: 'views/menu/menu.html',controller: 'MenuController'})
 		.when('/contents', {templateUrl: 'views/contents/contents.html',controller: 'ContentsController'})
 		.when('/boardConfig', {templateUrl: 'views/boardConfig/boardConfig.html',controller: 'BoardConfigController'})
+		.when('/bannerZone', {templateUrl: 'views/bannerZone/bannerZone.html',controller: 'BannerZoneController'})
+		.when('/banner', {templateUrl: 'views/banner/banner.html',controller: 'BannerController'})
 		.otherwise({redirectTo: '/admin'});
 });
-
-/*
-app.directive('ckEditor', function () {
-  return {
-    require: '?ngModel',
-    link: function (scope, elm, attr, ngModel) {
-      var ck = CKEDITOR.replace(elm[0]);
-      if (!ngModel) return;
-      ck.on('instanceReady', function () {
-        ck.setData(ngModel.$viewValue);
-      });
-      function updateModel() {
-        scope.$apply(function () {
-          ngModel.$setViewValue(ck.getData());
-        });
-      }
-      //ck.on('change', updateModel);
-      ck.on('key', updateModel);
-      ck.on('dataReady', updateModel);
-      ck.on('pasteState', updateModel);
-      
-      ngModel.$render = function (value) { 
-    	if (ngModel.$viewValue == null) {
-    		ck.setData('');
-    	} else {
-    		ck.setData(ngModel.$viewValue);
-    	} 
-      };
-    }
-  };
-});
-*/
 
 app.filter('useStateFilter', function () {
   return function (value) {
@@ -69,3 +39,11 @@ app.filter('boardTypeFilter', function () {
 	  };
 	});
 
+app.filter('startFrom', function() {
+    return function(input, start) {
+    	if (input) {
+    		start = +start; //parse to int
+            return input.slice(start);
+    	}
+    }
+});

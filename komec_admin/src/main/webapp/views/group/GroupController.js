@@ -68,7 +68,7 @@
 		    $http({
 		      method  : 'POST',
 		      url     : '/group/save',
-		      data    : $scope.group //forms user object
+		      data    : $scope.group 
 		     })
 		      .success(function(response) {
 		    	  $uibModalInstance.close('save');
@@ -80,7 +80,7 @@
 	    		$http({
 					method  : 'POST',
 					url     : '/group/del',
-					data    : $scope.group //forms user object
+					data    : $scope.group 
 				}).success(function(response) {
 					$uibModalInstance.close('del');
 				});

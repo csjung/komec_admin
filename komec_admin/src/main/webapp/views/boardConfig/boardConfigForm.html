@@ -4,75 +4,75 @@
 </div>
 <div class="modal-body">
   <div class="form-group">
-    <label class="control-label col-sm-3" for="name">게시판 명</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="name">게시판 명</label>
+    <div class="col-lg-9">
         <input type="text" class="form-control" placeholder="게시판 명" ng-model="boardConfig.name" ng-required="true">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="boardType">게시판 종류</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="boardType">게시판 종류</label>
+    <div class="col-lg-9">
         <label class="btn btn-success" ng-model="boardConfig.boardType" uib-btn-radio="'COMMON'" >일반</label>
         <label class="btn btn-success" ng-model="boardConfig.boardType" uib-btn-radio="'IMAGE'">이미지 게시판</label>
         <label class="btn btn-success" ng-model="boardConfig.boardType" uib-btn-radio="'CALENDAR'">달력 게시판</label>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="boardType">게시판 속성</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="boardType">게시판 속성</label>
+    <div class="col-lg-9">
         <label class="btn btn-success" ng-model="boardConfig.writeYesOrNo" uib-btn-checkbox >작성 여부</label>
         <label class="btn btn-success" ng-model="boardConfig.deleteYesOrNo" uib-btn-checkbox>삭제 여부</label>
         <label class="btn btn-success" ng-model="boardConfig.replayYesOrNo" uib-btn-checkbox>답글 여부</label>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="pagePerCnt">페이지 건수</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="pagePerCnt">페이지 건수</label>
+    <div class="col-lg-9">
         <input type="text" class="form-control" placeholder="페이지 건수" ng-model="boardConfig.pagePerCnt">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="newIconDay">NEW 아이콘 노출일수(0일 경우 미노출)</label>
-    <div class="col-sm-3">
+    <label class="control-label col-lg-3" for="newIconDay">NEW 아이콘 노출일수(0일 경우 미노출)</label>
+    <div class="col-lg-3">
         <input type="text" class="form-control" placeholder="NEW 아이콘 노출일수" ng-model="boardConfig.newIconDay">
     </div>
-    <label class="control-label col-sm-3" for="hotIconDay">HOT 아이콘 노출 일수(0일 경우 미노출)</label>
-    <div class="col-sm-3">
+    <label class="control-label col-lg-3" for="hotIconDay">HOT 아이콘 노출 일수(0일 경우 미노출)</label>
+    <div class="col-lg-3">
         <input type="text" class="form-control" placeholder="HOT 아이콘 노출 일수" ng-model="boardConfig.hotIconDay">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="useEditState">에디터 사용여부</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="useEditState">에디터 사용여부</label>
+    <div class="col-lg-9">
         <label class="btn btn-success" ng-model="boardConfig.useEditState" uib-btn-radio="'USE'" >사용</label>
         <label class="btn btn-success" ng-model="boardConfig.useEditState" uib-btn-radio="'NOTUSE'">사용안함</label>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="useState">사용유무</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="useState">사용유무</label>
+    <div class="col-lg-9">
         <label class="btn btn-success" ng-model="boardConfig.useState" uib-btn-radio="'USE'" >사용</label>
         <label class="btn btn-success" ng-model="boardConfig.useState" uib-btn-radio="'NOTUSE'">사용안함</label>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="useState">글머리</label>
-    <div class="tags  col-sm-9">
+    <label class="control-label col-lg-3" for="useState">글머리</label>
+    <div class="tags  col-lg-9">
       <h4><span ng-repeat="cate in boardConfig.boardCategorys" class="tag label label-success">{{cate.name}} <a class="close" href ng-click="removeCate($index)">×</a></span></h4>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3"></label>
-    <div class="tags col-sm-7" >
+    <label class="control-label col-lg-3"></label>
+    <div class="tags col-lg-7" >
       <input type="text" class="form-control" placeholder="글머리" ng-model="category">
     </div>
-    <div class="col-sm-2">
+    <div class="col-lg-2">
       <button class="btn btn-primary" type="button" ng-click="addCate()">글머리 추가</button>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="remarks">비고</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="remarks">비고</label>
+    <div class="col-lg-9">
         <input type="text" class="form-control" placeholder="비고" ng-model="boardConfig.remarks">
     </div>
   </div>

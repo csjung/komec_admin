@@ -19,7 +19,7 @@ public class AdminController {
 	
 	@RequestMapping(value = "/admin/save", method = RequestMethod.POST)
 	public AdminManager save(@RequestBody AdminManager adminManager) {
-		adminManager = adminRepository.save(adminManager);
+		adminRepository.save(adminManager);
 		return adminManager;
 	}
 	

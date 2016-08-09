@@ -80,7 +80,7 @@
 		    $http({
 		      method  : 'POST',
 		      url     : '/admin/save',
-		      data    : $scope.admin //forms user object
+		      data    : $scope.admin 
 		     })
 		      .success(function(response) {
 		    	  $uibModalInstance.close('save');
@@ -92,7 +92,7 @@
 	    		$http({
 					method  : 'POST',
 					url     : '/admin/del',
-					data    : $scope.admin //forms user object
+					data    : $scope.admin 
 				}).success(function(response) {
 					$uibModalInstance.close('del');
 				});
@@ -106,7 +106,7 @@
 	    		$http({
 					method  : 'GET',
 					url     : '/admin/getAdminByUserId',
-					params  : $scope.admin //forms user object
+					params  : $scope.admin 
 				}).success(function(response) {
 					$scope.idConfirmValue = $scope.admin.userId;
 					if (response.length == 0) {

@@ -3,7 +3,7 @@
   
 	angular.module('app').controller('BoardConfigController', function ($scope, $uibModal, $http) {
     	
-		$scope.myAppScopeProvider = {
+		$scope.boardConfigProvider = {
 			showInfo : function(row) {
 				var modalInstance = $uibModal.open({
 					animation: true,
@@ -23,7 +23,7 @@
 				});
 				
 				modalInstance.result.then(function (selectedItem) {
-					$scope.myAppScopeProvider.getData();
+					$scope.boardConfigProvider.getData();
 			    }, function () {});
 			},
 			getData : function(row) {
@@ -32,7 +32,22 @@
 	      	    });
 	        },
 	        toBoard : function(row) {
-	        	
+	        	var modalInstance = $uibModal.open({
+					animation: true,
+					templateUrl: 'views/boardConfig/boardList.html',
+					controller: 'BoardListModal',
+					size: 'lg',
+				    windowClass: 'big-modal',
+					resolve: {
+						boardConfig: function () {
+							if (row) {
+								return row.entity;
+			        		}  else {
+			        			return $scope.boardConfig;
+			        		}
+						}
+					}
+				});
 	        }
 			
 		};
@@ -40,7 +55,7 @@
 			onRegisterApi: function(gridApi){ 
 			    $scope.gridApi = gridApi;
 			},
-			appScopeProvider: $scope.myAppScopeProvider,
+			appScopeProvider: $scope.boardConfigProvider,
 			enableColumnMenus: false,
 			columnDefs: [
 				{ field: 'id', displayName: '번호', width: '5%', headerCellClass: 'text-center', cellClass: 'text-center'},
@@ -62,11 +77,11 @@
 			$scope.boardConfig.pagePerCnt = 10;
 			$scope.boardConfig.boardCategorys = [];
 			
-	    	$scope.myAppScopeProvider.showInfo();
+	    	$scope.boardConfigProvider.showInfo();
 	    };
       
 	    // 리스트 조회
-	    $scope.myAppScopeProvider.getData();
+	    $scope.boardConfigProvider.getData();
 	})
 	.controller('BoardConfigModal', function ($scope, $uibModalInstance, $http, $window, boardConfig) {
 		$scope.boardConfig = boardConfig;
@@ -75,7 +90,7 @@
 		    $http({
 		      method  : 'POST',
 		      url     : '/boardConfig/save',
-		      data    : $scope.boardConfig //forms user object
+		      data    : $scope.boardConfig 
 		     })
 		      .success(function(response) {
 		    	  $uibModalInstance.close('save');
@@ -89,12 +104,11 @@
 	    		$http({
 					method  : 'POST',
 					url     : '/boardConfig/del',
-					data    : $scope.boardConfig //forms user object
+					data    : $scope.boardConfig 
 				}).success(function(response) {
 					$uibModalInstance.close('del');
 				});
 	    	}
-	    	
 	  	};
 	  	
 	  	$scope.addCate = function() {
@@ -120,6 +134,79 @@
 	    $scope.cancel = function () {
 	  	  $uibModalInstance.dismiss('cancel');
 	  	};
-	});
+	})
+	
+	.controller('BoardListModal', function ($scope, $uibModalInstance, $http, $window, $sce, boardConfig) {
+		$scope.viewFlag = true;
+		$scope.boardConfig = boardConfig;
+		$scope.currentPage = 1;
+	    $scope.pageSize = 10;
+	    $scope.maxSize = 10;
+	    $scope.q = '';
+	    
+		$http.get('/boardData/getBoardDataListByConfigId?id=' + boardConfig.id).success(function(data) {
+	      $scope.boards = data;
+	      $scope.totalItems = data.length;
+	    });
+		
+	    // 신규
+	    $scope.create = function () {
+	    	$scope.boardData = {};
+	    	$scope.boardData.boardConfigId = boardConfig.id;
+	    	$scope.viewFlag = false;
+	  	};
+	  	
+	  	$scope.boardView = function (item) {
+	  		$scope.boardData = item;
+	  		$scope.boardData.contents = $sce.trustAsHtml(item.contents);
+	    	$scope.viewFlag = false;
+	  	}
+	  	
+	    // 저장
+	    $scope.save = function() {
+		    $http({
+		      method  : 'POST',
+		      url     : '/boardData/save',
+		      data    : $scope.boardData 
+		     })
+		      .success(function(response) {
+		    	  $scope.boardData = response; 
+		    	  alert('정상 처리 되었습니다.');
+		      });
+	    };
+	    
+	    // 삭제
+	    $scope.del = function () {
+	    	var delConfirm = $window.confirm('정말 삭제 하시겠습니까 ?');
+	    	if (delConfirm) {
+	    		$http({
+					method  : 'POST',
+					url     : '/boardData/del',
+					data    : $scope.boardData 
+				}).success(function(response) {
+					$scope.viewFlag = true;
+				});
+	    	}
+	  	};
+	  	
+	    // 돌아가기
+	    $scope.back = function () {
+	    	$scope.viewFlag = true;
+	  	};
+		  	
+		// 닫기
+	    $scope.cancel = function () {
+	  	  $uibModalInstance.dismiss('cancel');
+	  	};
+	  	
+	    // 에디터 셋팅
+		$scope.editorOptions = {
+			height : 250,
+			uiColor: '#cceaee'
+		};
+		
+	})
+	
+	;
  
 }());      

@@ -26,6 +26,19 @@ app.run(['$q', '$timeout', function($q, $timeout) {
         }
     }
     CKEDITOR.on('loaded', checkLoaded);
+    
+    CKEDITOR.on('dialogDefinition', function(ev) {
+    	var dialogName = ev.data.name;
+    	var dialogDefinition = ev.data.definition;
+     
+    	if (dialogName == 'image') {
+    		dialogDefinition.onShow = function () {
+    			// This code will open the Advanced tab.
+    			this.selectPage('Upload');
+    		};
+    	}
+    });
+    
     $timeout(checkLoaded, 100);
 }])
 
@@ -58,7 +71,6 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                         { name: 'editing', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock' ] },
                         { name: 'links', items: [ 'Link', 'Unlink', 'Anchor' ] },
                         { name: 'tools', items: [ 'SpellChecker', 'Maximize' ] },
-                        '/',
                         { name: 'styles', items: [ 'Format', 'FontSize', 'TextColor', 'PasteText', 'PasteFromWord', 'RemoveFormat' ] },
                         { name: 'insert', items: [ 'Image', 'Table', 'SpecialChar' ] },
                         { name: 'forms', items: [ 'Outdent', 'Indent' ] },

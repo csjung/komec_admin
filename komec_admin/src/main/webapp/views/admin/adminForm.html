@@ -5,29 +5,29 @@
 <div class="modal-body">
   <input type="hidden" id="id" ng-model="admin.id">
   <div class="form-group">
-    <label class="control-label col-sm-3" for="userId">아이디</label>
-    <div class="col-sm-6">
+    <label class="control-label col-lg-3" for="userId">아이디</label>
+    <div class="col-lg-6">
         <input type="text" class="form-control" id="userId" placeholder="아이디" ng-model="admin.userId" ng-required="true" ng-change="userIdChange()" ng-readonly="delFlag">
     </div>
-    <div class="col-sm-3">
+    <div class="col-lg-3">
         <button class="btn" ng-class="confirmStyle" type="button" ng-hide="delFlag" ng-click="idConfirm()">아이디확인</button>
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="password">패스워드</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="password">패스워드</label>
+    <div class="col-lg-9">
         <input type="password" class="form-control" id="password" placeholder="패스워드" ng-model="admin.password" ng-required="true">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="passwordConfirm">패스워드 확인</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="passwordConfirm">패스워드 확인</label>
+    <div class="col-lg-9">
         <input type="password" class="form-control" id="passwordConfirm" ng-model="admin.passwordConfirm" placeholder="패스워드 확인" ng-required="true">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="userName">이름</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" >이름</label>
+    <div class="col-lg-9">
         <input type="text" class="form-control" id="userName" placeholder="이름" ng-model="admin.userName" ng-required="true">
     </div>
   </div>

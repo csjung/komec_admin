@@ -5,20 +5,20 @@
 <div class="modal-body">
   <input type="hidden" id="id" ng-model="site.id">
   <div class="form-group">
-    <label class="control-label col-sm-3" for="userId">사이트 명</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="userId">사이트 명</label>
+    <div class="col-lg-9">
         <input type="text" class="form-control" id="name" placeholder="사이트 명을 입력 해 주세요." ng-model="site.name" ng-required="true">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="password">사이트 주소</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="password">사이트 주소</label>
+    <div class="col-lg-9">
         <input type="text" class="form-control" id="siteUrl" placeholder="사이트 주소를 입력 해 주세요." ng-model="site.siteUrl" ng-required="true">
     </div>
   </div>
   <div class="form-group">
-    <label class="control-label col-sm-3" for="useState">사용유무</label>
-    <div class="col-sm-9">
+    <label class="control-label col-lg-3" for="useState">사용유무</label>
+    <div class="col-lg-9">
         <label class="btn btn-success" ng-model="site.useState" uib-btn-radio="'USE'" >사용</label>
         <label class="btn btn-success" ng-model="site.useState" uib-btn-radio="'NOTUSE'">사용안함</label>
     </div>
