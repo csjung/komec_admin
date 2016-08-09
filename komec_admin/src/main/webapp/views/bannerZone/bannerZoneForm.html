@@ -1,0 +1,44 @@
+<form name="form" class="form-horizontal">
+<div class="modal-header">
+   <h3 class="modal-title">배너존 등록</h3>
+</div>
+<div class="modal-body">
+  <div class="form-group">
+    <label class="control-label col-lg-3">사이트 선택</label>
+    <div class="col-lg-9">
+        <select class="form-control" ng-model="site" ng-options="site.name for site in sites track by site.id">
+        </select>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-lg-3">타이틀</label>
+    <div class="col-lg-9">
+        <input type="text" class="form-control" ng-model="bannerZone.title">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-lg-3" >주석</label>
+    <div class="col-lg-9">
+        <input type="text" class="form-control" ng-model="bannerZone.remarks">
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-lg-3" >사용유무</label>
+    <div class="col-lg-9">
+        <label class="btn btn-success" ng-model="bannerZone.useState" uib-btn-radio="'USE'" >사용</label>
+        <label class="btn btn-success" ng-model="bannerZone.useState" uib-btn-radio="'NOTUSE'">사용안함</label>
+    </div>
+  </div>
+</div>
+<div class="modal-footer">
+   <button class="btn btn-primary" type="button" ng-click="save()">
+     <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;저장
+   </button>
+   <button class="btn btn-danger" type="button" ng-show="bannerZone.id" ng-click="del()">
+       <span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;삭제
+   </button>
+   <button class="btn btn-warning" type="button" ng-click="cancel()">
+     <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;취소
+   </button>
+</div>
+</form>

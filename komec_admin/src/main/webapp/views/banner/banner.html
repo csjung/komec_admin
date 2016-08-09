@@ -1,0 +1,153 @@
+<!-- Nested node template -->
+<script type="text/ng-template" id="banners_renderer.html">
+  <div ui-tree-handle class="tree-node tree-node-content" ng-class="{nodrop: node.nodrop}">
+    <a class="btn btn-success btn-xs" ng-if="node.banners && node.banners.length > 0" data-nodrag ng-click="toggle(this)"><span
+        class="glyphicon"
+        ng-class="{
+          'glyphicon-chevron-right': collapsed,
+          'glyphicon-chevron-down': !collapsed
+        }"></span></a>
+    <div class="tree-node-content-text">
+      <img ng-src="/fileInfo/downloadFile.do?id={{node.fileInfoId}}" style="height: 50px;margin-right: 5px;" ng-show="node.fileInfoId" />
+    {{node.title}}
+    </div>
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="removeItem(this)" ng-show="node.bannerZoneId">
+      <span class="glyphicon glyphicon-remove"></span>
+    </a>
+    <a class="pull-right btn btn-primary btn-xs" data-nodrag ng-click="newSubItem(this)" style="margin-right: 5px;" ng-hide="node.bannerZoneId">
+      <span class="glyphicon glyphicon-plus"></span>
+    </a>
+    <a class="pull-right btn btn-danger btn-xs" data-nodrag ng-click="edit(this)" style="margin-right: 5px;" ng-show="node.bannerZoneId">
+      <span class="glyphicon glyphicon-edit"></span>
+    </a>
+  </div>
+  <ol ui-tree-nodes="" ng-model="node.banners" ng-class="{hidden: collapsed}">
+    <li ng-repeat="node in node.banners | filter: contentFilter" ui-tree-node ng-include="'banners_renderer.html'"></li>
+  </ol>
+</script>
+
+<div class="row">
+    <div class="col-lg-11">
+        <h2 class="page-header">배너 관리</h2>
+    </div> 
+    <div class="col-lg-1 page-header">
+        <button class="btn btn-primary" type="button" ng-click="back()">돌아가기</button>
+    </div>    
+</div>
+<div class="row" style="margin-top: 10px;">
+  <div class="col-lg-4">
+    <div ui-tree="treeOptions">
+      <ol ui-tree-nodes ng-model="banners">
+        <li ng-repeat="node in banners" ui-tree-node ng-include="'banners_renderer.html'"></li>
+      </ol>
+    </div>
+  </div>
+  <div class="col-lg-8" ng-show="bannerFlag">
+    <form class="form-horizontal" role="form">
+      <div class="form-group">
+        <label class="control-label col-lg-2">베너명</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" ng-model="banner.title">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-lg-2" >게시여부</label>
+        <div class="col-lg-10">
+            <label class="btn btn-success" ng-model="banner.useState" uib-btn-radio="'USE'" >게시</label>
+            <label class="btn btn-success" ng-model="banner.useState" uib-btn-radio="'NOTUSE'">게시안함</label>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-lg-2">메모</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" ng-model="banner.remarks">
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-lg-2">게시일자</label>
+        <div class="col-lg-4">
+        <p class="input-group" style="margin: 0;">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="banner.dispalyStartDay" is-open="popup1.opened" datepicker-options="dateOptions" close-text="Close" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="calOpen1()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </p>
+        </div>
+        <label class="control-label col-lg-2" style="text-align: center;">~</label>
+        <div class="col-lg-4">
+        <p class="input-group" style="margin: 0;">
+            <input type="text" class="form-control" uib-datepicker-popup ng-model="banner.dispalyEndDay" is-open="popup2.opened" datepicker-options="dateOptions" close-text="Close" />
+            <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="calOpen2()"><i class="glyphicon glyphicon-calendar"></i></button>
+            </span>
+        </p>
+        </div>
+      </div>
+      <div class="form-group">
+        <label class="control-label col-lg-2">링크</label>
+        <div class="col-lg-4">
+            <input type="text" class="form-control" ng-model="banner.link">
+        </div>
+        <label class="control-label col-lg-2">타켓</label>
+        <div class="col-lg-4">
+            <select class="form-control" ng-model="banner.targetType" ng-options="targetType for targetType in targetTypes"></select>
+        </div>
+      </div>
+      <div class="form-group" ng-show="banner.fileInfoId">
+        <label class="control-label col-lg-2">업로드 이미지</label>
+        <div class="col-lg-10">
+        <img ng-src="/fileInfo/downloadFile.do?id={{banner.fileInfoId}}" style="height: 100px;"/>&nbsp;&nbsp;&nbsp;
+        <button type="button" class="btn btn-danger btn-xs" ng-click="fileRemove()">
+          <span class="glyphicon glyphicon-trash"></span> Remove
+        </button>
+        </div>
+      </div>  
+      <div class="form-group"ng-hide="banner.fileInfoId">
+        <label class="control-label col-lg-2">이미지 업로드</label>
+        <div class="col-lg-10">
+            <input type="file" nv-file-select="" uploader="uploader" multiple  />
+            
+            <table class="table">
+                  <thead>
+                      <tr>
+                          <th width="50%">Name</th>
+                          <th ng-show="uploader.isHTML5">Size</th>
+                          <th ng-show="uploader.isHTML5">Progress</th>
+                          <th>Status</th>
+                          <th>Actions</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr ng-repeat="item in uploader.queue">
+                          <td><strong>{{ item.file.name }}</strong></td>
+                          <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                          <td ng-show="uploader.isHTML5">
+                              <div class="progress" style="margin-bottom: 0;">
+                                  <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                              </div>
+                          </td>
+                          <td class="text-center">
+                              <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                              <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                              <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                          </td>
+                          <td nowrap>
+                              <button type="button" class="btn btn-primary btn-xs" ng-click="item.upload()" ng-disabled="item.isReady || item.isUploading || item.isSuccess">
+                                <span class="glyphicon glyphicon-upload"></span> Upload
+                              </button>
+                              <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                                <span class="glyphicon glyphicon-trash"></span> Remove
+                              </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+        </div>
+      </div>  
+      <div class="modal-footer">
+        <button class="btn btn-primary" type="button" ng-click="save()">저장</button>
+      </div>
+    </form>  
+  </div>
+
+</div>

@@ -1,0 +1,93 @@
+<div ng-show="viewFlag"> 
+<div class="modal-header">
+   <h3 class="modal-title" ng-bind="boardConfig.name"></h3>
+</div>
+<div class="modal-body">
+    <table class="">
+    <colgroup>
+    <col style="width:10%;">
+    <col style="width:50%;">
+    <col style="width:10%;">
+    <col style="width:10%;">
+    <col style="width:10%;">
+    <col style="width:10%;">
+    </colgroup>
+    <thead>
+    <tr>
+        <th class="">NO.</th>
+        <th class="">제목</th>
+        <th>작성자</th>
+        <th>조회</th>
+        <th>파일</th>
+        <th>작성일</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr ng-repeat="item in boards | startFrom:(currentPage -1)*pageSize | limitTo:pageSize">
+      <td>{{totalItems - ($index + (currentPage -1)*pageSize)}}</td>
+      <td ng-click="boardView(item)"><a href ng-bind="item.title"></a></td>
+      <td ng-bind="item.insertName"></td>
+      <td ng-bind="item.recoCnt"></td>
+      <td ng-bind=""></td>
+      <td ng-bind="item.insertDate"></td>
+    </tr>
+    </tbody>
+    </table>
+    <!-- pagination -->
+    <div class="row text-center">
+    <ul uib-pagination boundary-links="true" total-items="totalItems" ng-model="currentPage" class="pagination-sm" max-size="maxSize" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;"></ul>
+    </div>
+    
+</div>
+<div class="modal-footer">
+   <button class="btn btn-primary" type="button" ng-show="boardConfig.id" ng-click="create()">
+       <span class="glyphicon glyphicon-plus-sign"></span>&nbsp;&nbsp;신규
+   </button>
+   <button class="btn btn-warning" type="button" ng-click="cancel()">
+     <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;닫기
+   </button>
+</div>
+
+</div>
+
+<div ng-hide="viewFlag"> 
+<form name="form" class="form-horizontal">
+<div class="modal-header">
+   <h3 class="modal-title" ng-bind="boardConfig.name"></h3>
+</div>
+
+<div class="modal-body">
+    <div class="form-group">
+        <label class="control-label col-lg-2">머리글</label>
+        <div class="col-lg-10">
+            <select class="form-control" ng-model="boardData.head" ng-options="category.name for category in boardConfig.boardCategorys track by category.id">
+                <option value="" selected="selected">-- 머리글 선택 --</option>  
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">타이틀</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" ng-model="boardData.title">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group col-lg-12" style="margin-left: 10px;">
+          <textarea ng-model="boardData.contents" ckeditor="editorOptions"></textarea>
+        </div>
+    </div>    
+</div>
+
+<div class="modal-footer">
+   <button class="btn btn-primary" type="button" ng-click="save()">
+     <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;저장
+   </button>
+   <button class="btn btn-danger" type="button" ng-show="boardData.id" ng-click="del()">
+       <span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;삭제
+   </button>
+   <button class="btn btn-warning" type="button" ng-click="back()">
+     <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;돌아가기
+   </button>
+</div>
+</form>
+</div>
