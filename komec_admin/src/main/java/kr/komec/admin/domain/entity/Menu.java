@@ -13,6 +13,9 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
 
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import kr.komec.admin.domain.enumeration.MenuType;
@@ -54,6 +57,7 @@ public class Menu {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "contentsId", insertable = false, updatable = false)
+	@NotFound(action = NotFoundAction.IGNORE)
 	private Contents contents;
 	
 	/** 프로그램 URL */
@@ -65,6 +69,7 @@ public class Menu {
 	
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "boardConfigId", insertable = false, updatable = false)
+	@NotFound(action = NotFoundAction.IGNORE)
 	private BoardConfig boardConfig;
 	
 	/** 메뉴타입 */
