@@ -12,6 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OrderBy;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -58,6 +59,7 @@ public class Menu {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "contentsId", insertable = false, updatable = false)
 	@NotFound(action = NotFoundAction.IGNORE)
+	@Transient
 	private Contents contents;
 	
 	/** 프로그램 URL */
@@ -70,6 +72,7 @@ public class Menu {
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "boardConfigId", insertable = false, updatable = false)
 	@NotFound(action = NotFoundAction.IGNORE)
+	@Transient
 	private BoardConfig boardConfig;
 	
 	/** 메뉴타입 */
