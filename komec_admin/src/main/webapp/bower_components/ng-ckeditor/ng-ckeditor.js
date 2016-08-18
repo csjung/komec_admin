@@ -78,6 +78,7 @@ app.directive('ckeditor', ['$timeout', '$q', function ($timeout, $q) {
                         { name: 'document', items: [ 'PageBreak', 'Source' ] }
                     ],
                     disableNativeSpellChecker: false,
+                    allowedContent : true,
                     uiColor: '#FAFAFA',
                     height: '400px',
                     width: '100%'
