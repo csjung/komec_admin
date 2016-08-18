@@ -93,6 +93,13 @@
             </div>
           </div>
           <div class="form-group">
+            <label class="control-label col-lg-3">인증여부</label>
+            <div class="col-lg-9">
+                <label class="btn btn-success" ng-model="menu.isAnonymous" uib-btn-radio="'YES'" >미인증사용</label>
+                <label class="btn btn-success" ng-model="menu.isAnonymous" uib-btn-radio="'NO'">인증사용</label>
+            </div>
+          </div>
+          <div class="form-group">
             <label class="control-label col-lg-3" >사용유무</label>
             <div class="col-lg-9">
                 <label class="btn btn-success" ng-model="menu.useState" uib-btn-radio="'USE'" >사용</label>

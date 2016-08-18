@@ -32,6 +32,7 @@
 			var menu = {};
 			menu.menus = [];
 			menu.useState = 'USE';
+			menu.useState = 'YES';
 			if (nodeData.upperId === undefined) {
 				menu.siteId = nodeData.id;
 			} else {

@@ -1,5 +1,5 @@
 'use strict';
-var app = angular.module('app', ['ui.tree', 'ngRoute', 'ui.bootstrap', 'ui.grid', 'ngAnimate', 'ngCkeditor', 'angularFileUpload', 'ngSanitize']);
+var app = angular.module('app', ['ui.tree', 'ngRoute', 'ui.bootstrap', 'ui.grid', 'ui.grid.edit', 'ui.grid.rowEdit', 'ui.grid.cellNav', 'ngAnimate', 'ngCkeditor', 'angularFileUpload', 'ngSanitize']);
 
 app.config(function($routeProvider, $locationProvider) {
 	
@@ -12,6 +12,7 @@ app.config(function($routeProvider, $locationProvider) {
 		.when('/boardConfig', {templateUrl: 'views/boardConfig/boardConfig.html',controller: 'BoardConfigController'})
 		.when('/bannerZone', {templateUrl: 'views/bannerZone/bannerZone.html',controller: 'BannerZoneController'})
 		.when('/banner', {templateUrl: 'views/banner/banner.html',controller: 'BannerController'})
+		.when('/history', {templateUrl: 'views/history/history.html',controller: 'HistoryController'})
 		.otherwise({redirectTo: '/admin'});
 });
 

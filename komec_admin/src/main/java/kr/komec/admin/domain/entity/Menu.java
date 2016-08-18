@@ -21,6 +21,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import kr.komec.admin.domain.enumeration.MenuType;
 import kr.komec.admin.domain.enumeration.UseState;
+import kr.komec.admin.domain.enumeration.YesOrNo;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -77,6 +78,9 @@ public class Menu {
 	
 	/** 메뉴타입 */
 	private MenuType menuType;
+	
+	/** 인증여부 */
+	private YesOrNo isAnonymous;
 	
 	/** 사용유무 */
 	private UseState useState;
