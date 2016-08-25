@@ -133,7 +133,37 @@
     	    }).then(function(response){
     	      return response.data;
     	    });
-    	  };
+    	};
+    	
+    	// drag and drop
+        $scope.treeOptions = {
+        	beforeDrop : function (e) {
+        		var source = e.source;
+                var dest = e.dest;
+                if (source && source.index != dest.index) {
+                	var scObj = source.nodeScope.$modelValue;
+                    var deObj = source.nodesScope.$modelValue[dest.index];
+                    var scSort = scObj.sort;
+                    var deSort = deObj.sort;
+                    scObj.sort = deSort;
+                    deObj.sort = scSort;
+                    $http({
+                        method  : 'POST',
+                        url     : '/menu/save',
+                        data    : scObj 
+                       })
+                       .success(function(response) {
+                       });
+                    $http({
+                        method  : 'POST',
+                        url     : '/menu/save',
+                        data    : deObj 
+                       })
+                       .success(function(response) {
+                       });
+                }
+        	}
+        };
 
     	  
 	})
