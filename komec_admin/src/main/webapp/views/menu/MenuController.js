@@ -143,6 +143,8 @@
                 if (source && source.index != dest.index) {
                 	var scObj = source.nodeScope.$modelValue;
                     var deObj = source.nodesScope.$modelValue[dest.index];
+                    console.log(scObj);
+                    console.log(deObj);
                     var scSort = scObj.sort;
                     var deSort = deObj.sort;
                     scObj.sort = deSort;

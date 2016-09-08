@@ -19,7 +19,7 @@
     </a>
   </div>
   <ol ui-tree-nodes="" ng-model="node.menus" ng-class="{hidden: collapsed}">
-    <li ng-repeat="node in node.menus" ui-tree-node ng-include="'menus_renderer.html'"></li>
+    <li ng-repeat="node in node.menus" data-collapsed="true" ui-tree-node ng-include="'menus_renderer.html'"></li>
   </ol>
 </script>
 
