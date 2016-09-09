@@ -191,6 +191,10 @@
 	  	
 	    // 돌아가기
 	    $scope.back = function () {
+	    	$http.get('/boardData/getBoardDataListByConfigId?id=' + boardConfig.id).success(function(data) {
+	  	      $scope.boards = data;
+	  	      $scope.totalItems = data.length;
+	  	    });
 	    	$scope.viewFlag = true;
 	  	};
 		  	

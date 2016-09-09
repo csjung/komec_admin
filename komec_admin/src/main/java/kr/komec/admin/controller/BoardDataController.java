@@ -19,6 +19,7 @@ public class BoardDataController {
 	
 	@RequestMapping(value = "/boardData/save", method = RequestMethod.POST)
 	public BoardData save(@RequestBody BoardData boardData) {
+		boardData.setBoardCategoryId(boardData.getBoardCategory().getId());
 		boardDataRepository.save(boardData);
 		return boardData;
 	}

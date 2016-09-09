@@ -60,7 +60,7 @@
     <div class="form-group">
         <label class="control-label col-lg-2">머리글</label>
         <div class="col-lg-10">
-            <select class="form-control" ng-model="boardData.head" ng-options="category.name for category in boardConfig.boardCategorys track by category.id">
+            <select class="form-control" ng-model="boardData.boardCategory" ng-options="category.name for category in boardConfig.boardCategorys track by category.id">
                 <option value="" selected="selected">-- 머리글 선택 --</option>  
             </select>
         </div>
