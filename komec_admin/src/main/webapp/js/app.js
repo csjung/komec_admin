@@ -10,6 +10,7 @@ app.config(function($routeProvider, $locationProvider) {
 		.when('/menu', {templateUrl: 'views/menu/menu.html',controller: 'MenuController'})
 		.when('/contents', {templateUrl: 'views/contents/contents.html',controller: 'ContentsController'})
 		.when('/boardConfig', {templateUrl: 'views/boardConfig/boardConfig.html',controller: 'BoardConfigController'})
+		.when('/board', {templateUrl: 'views/board/board.html',controller: 'BoardController'})
 		.when('/bannerZone', {templateUrl: 'views/bannerZone/bannerZone.html',controller: 'BannerZoneController'})
 		.when('/banner', {templateUrl: 'views/banner/banner.html',controller: 'BannerController'})
 		.when('/history', {templateUrl: 'views/history/history.html',controller: 'HistoryController'})
@@ -28,17 +29,17 @@ app.filter('useStateFilter', function () {
 });
 
 app.filter('boardTypeFilter', function () {
-	  return function (value) {
-		  if (value == 'COMMON') {
-			  return '일반';
-		  } else if (value == 'IMAGE') {
-			  return '이미지 게시판';
-		  } else {
-			  return '달력 게시판';
-		  }
-	    
-	  };
-	});
+  return function (value) {
+	  if (value == 'COMMON') {
+		  return '일반';
+	  } else if (value == 'IMAGE') {
+		  return '이미지 게시판';
+	  } else {
+		  return '달력 게시판';
+	  }
+    
+  };
+});
 
 app.filter('startFrom', function() {
     return function(input, start) {
@@ -47,4 +48,14 @@ app.filter('startFrom', function() {
             return input.slice(start);
     	}
     }
+});
+
+app.filter('boardCateFilter', function () {
+  return function (item) {
+	  if (item.boardCategory) {
+		  return '[' + item.boardCategory.name + '] ' + item.title;
+	  } else {
+		  return item.title;
+	  }
+  };
 });

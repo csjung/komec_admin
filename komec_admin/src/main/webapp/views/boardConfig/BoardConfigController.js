@@ -1,7 +1,7 @@
 (function () {
 	'use strict';
   
-	angular.module('app').controller('BoardConfigController', function ($scope, $uibModal, $http) {
+	angular.module('app').controller('BoardConfigController', function ($scope, $uibModal, $http, $location) {
     	
 		$scope.boardConfigProvider = {
 			showInfo : function(row) {
@@ -32,6 +32,8 @@
 	      	    });
 	        },
 	        toBoard : function(row) {
+	        	$location.url('/board?boardConfigId=' + row.entity.id);
+	        	/*
 	        	var modalInstance = $uibModal.open({
 					animation: true,
 					templateUrl: 'views/boardConfig/boardList.html',
@@ -48,6 +50,7 @@
 						}
 					}
 				});
+				*/
 	        }
 			
 		};
@@ -84,6 +87,7 @@
 	    $scope.boardConfigProvider.getData();
 	})
 	.controller('BoardConfigModal', function ($scope, $uibModalInstance, $http, $window, boardConfig) {
+		console.log(boardConfig);
 		$scope.boardConfig = boardConfig;
 	    // 저장
 	    $scope.submitForm = function() {
@@ -143,6 +147,11 @@
 	    $scope.pageSize = 10;
 	    $scope.maxSize = 10;
 	    $scope.q = '';
+	    $scope.boardData = {};
+	    
+	    $scope.$on("ckeditor.ready", function( event ) {
+            $scope.isReady = true;
+        });
 	    
 		$http.get('/boardData/getBoardDataListByConfigId?id=' + boardConfig.id).success(function(data) {
 	      $scope.boards = data;

@@ -1,5 +1,6 @@
 package kr.komec.admin.domain.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -30,15 +31,11 @@ public class BoardFiles {
 	/** 게시판 아이디 */
 	private long boardDataId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "boardDataId", insertable = false, updatable = false)
-	private BoardData boardData;
-	
 	/** 파일 정보 아이디 */
-	private long FileInfoId;
+	private long fileInfoId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "FileInfoId", insertable = false, updatable = false)
+	@ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name = "fileInfoId", insertable = false, updatable = false)
 	private FileInfo fileInfo;
 	
 	/** 표시 순서 */

@@ -1,5 +1,7 @@
 package kr.komec.admin.domain.entity;
 
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -8,6 +10,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.NotFound;
+import org.hibernate.annotations.NotFoundAction;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -43,6 +48,8 @@ public class BoardData {
 	private String insertName;
 	/** 신규 입력 아이피 */
 	private String insertIp;
+	/** 신규 입력 날짜 */
+	private Date insertDate;
 	/** 패스워드 */
 	private String password;
 	
@@ -52,6 +59,8 @@ public class BoardData {
 	private String updateName;
 	/** 수정 입력 아이피 */
 	private String updateIp;
+	/** 수정 입력 날짜 */
+	private Date updateDate;
 	
 	/** 조회수 */
 	private int cnt;
@@ -63,7 +72,8 @@ public class BoardData {
 	@Column(nullable = true)
 	private long boardCategoryId;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER)
+	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumn(name = "boardCategoryId", insertable = false, updatable = false)
 	private BoardCategory boardCategory;
 	

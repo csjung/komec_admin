@@ -1,0 +1,106 @@
+<form name="form" class="form-horizontal">
+<div class="modal-header">
+   <h3 class="modal-title" ng-bind="boardConfig.name"></h3>
+</div>
+
+<div class="modal-body">
+    <div class="form-group">
+        <label class="control-label col-lg-2">머리글</label>
+        <div class="col-lg-10">
+            <select class="form-control" ng-model="boardData.boardCategory" ng-options="category.name for category in boardConfig.boardCategorys track by category.id">
+                <option value="" selected="selected">-- 머리글 선택 --</option>  
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-lg-2">타이틀</label>
+        <div class="col-lg-10">
+            <input type="text" class="form-control" ng-model="boardData.title">
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="form-group col-lg-12" style="margin-left: 10px;" ng-cloak>
+          <textarea ng-model="boardData.contents" ckeditor="editorOptions"></textarea>
+        </div>
+    </div>   
+    <div class="form-group" style="margin-left: 10px;">
+        <label for="">첨부파일 리스트</label>
+        <table class="table">
+              <thead>
+                  <tr>
+                      <th width="50%">Name</th>
+                      <th>Size</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="item in boardFiles">
+                      <td><strong><a href="/promotion/downloadFile.do?id={{item.id}}">{{ item.fileInfo.logFileName }}</a></strong></td>
+                      <td nowrap>{{ item.fileInfo.fileSize }} Byte</td>
+                      <td nowrap>
+                          <button type="button" class="btn btn-danger btn-xs" ng-click="fileRemove(item)">
+                              <span class="glyphicon glyphicon-trash"></span> Remove
+                          </button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+    </div>
+    <div class="form-group" style="margin-left: 10px;">
+        <label for="">첨부파일 </label>
+        <input type="file" nv-file-select="" uploader="uploader" multiple  />
+        <table class="table">
+              <thead>
+                  <tr>
+                      <th width="50%">Name</th>
+                      <th ng-show="uploader.isHTML5">Size</th>
+                      <th ng-show="uploader.isHTML5">Progress</th>
+                      <th>Status</th>
+                      <th>Actions</th>
+                  </tr>
+              </thead>
+              <tbody>
+                  <tr ng-repeat="item in uploader.queue">
+                      <td><strong>{{ item.file.name }}</strong></td>
+                      <td ng-show="uploader.isHTML5" nowrap>{{ item.file.size/1024/1024|number:2 }} MB</td>
+                      <td ng-show="uploader.isHTML5">
+                          <div class="progress" style="margin-bottom: 0;">
+                              <div class="progress-bar" role="progressbar" ng-style="{ 'width': item.progress + '%' }"></div>
+                          </div>
+                      </td>
+                      <td class="text-center">
+                          <span ng-show="item.isSuccess"><i class="glyphicon glyphicon-ok"></i></span>
+                          <span ng-show="item.isCancel"><i class="glyphicon glyphicon-ban-circle"></i></span>
+                          <span ng-show="item.isError"><i class="glyphicon glyphicon-remove"></i></span>
+                      </td>
+                      <td nowrap>
+                          <button type="button" class="btn btn-danger btn-xs" ng-click="item.remove()">
+                              <span class="glyphicon glyphicon-trash"></span> Remove
+                          </button>
+                      </td>
+                  </tr>
+              </tbody>
+          </table>
+          <div>
+              <button type="button" class="btn btn-success btn-s" ng-click="uploader.uploadAll()" ng-disabled="!uploader.getNotUploadedItems().length">
+                  <span class="glyphicon glyphicon-upload"></span> Upload all
+              </button>
+              <button type="button" class="btn btn-danger btn-s" ng-click="uploader.clearQueue()" ng-disabled="!uploader.queue.length">
+                  <span class="glyphicon glyphicon-trash"></span> Remove all
+              </button>
+          </div>
+      </div>  
+</div>
+
+<div class="modal-footer">
+   <button class="btn btn-primary" type="button" ng-click="save()">
+     <span class="glyphicon glyphicon-save"></span>&nbsp;&nbsp;저장
+   </button>
+   <button class="btn btn-danger" type="button" ng-show="boardData.id" ng-click="del()">
+       <span class="glyphicon glyphicon-minus-sign"></span>&nbsp;&nbsp;삭제
+   </button>
+   <button class="btn btn-warning" type="button" ng-click="cancel()">
+     <span class="glyphicon glyphicon-remove-circle"></span>&nbsp;&nbsp;닫기
+   </button>
+</div>
+</form>

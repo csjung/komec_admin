@@ -20,6 +20,22 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter() {
+	    /*
+		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+		ObjectMapper objectMapper = new ObjectMapper();
+		objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
+		jsonConverter.setObjectMapper(objectMapper);
+		return jsonConverter;
+		*/
+		
+		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
+        HibernateAwareObjectMapper hibernateAwareObjectMapper = new HibernateAwareObjectMapper();
+        jsonConverter.setObjectMapper(hibernateAwareObjectMapper);
+        return jsonConverter;
+	}
+	
+	@Bean
+	public MappingJackson2HttpMessageConverter customJackson2HttpMessageConverter2() {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 		ObjectMapper objectMapper = new ObjectMapper();
 		objectMapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
@@ -41,7 +57,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		converters.add(customJackson2HttpMessageConverter());
+		//converters.add(customJackson2HttpMessageConverter());
+		converters.add(customJackson2HttpMessageConverter2());
 		super.configureMessageConverters(converters);
 	}
 }

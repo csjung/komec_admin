@@ -27,6 +27,13 @@ public class BoardConfigController {
 	@Autowired
 	private BoardCategoryRepository boardCategoryRepository;
 	
+	@RequestMapping(value = "/boardConfig/getBoardConfig", method = RequestMethod.GET)
+	public BoardConfig getBoardConfig(long id) {
+		BoardConfig boardConfig = boardConfigRepository.findOne(id);
+		boardConfig.setBoardCategorys(getBoardCategoryList(boardConfig.getId()));
+		return boardConfig;
+	}
+	
 	@RequestMapping(value = "/boardConfig/save", method = RequestMethod.POST)
 	@Transactional
 	public BoardConfig save(@RequestBody BoardConfig boardConfig) {
